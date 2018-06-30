@@ -221,7 +221,13 @@
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent {
-	[self.target performSelector:@selector(openMenu) withObject:nil];
+    float vol = [NSSound systemVolume];
+
+    if (theEvent.deltaY < 0) {  // Down
+        [self.target performSelector:@selector(sliderAction:) withObject:[NSNumber numberWithFloat:vol-0.05]];
+    } else {  // Up
+        [self.target performSelector:@selector(sliderAction:) withObject:[NSNumber numberWithFloat:vol+0.05]];
+    }
 }
 
 @end
