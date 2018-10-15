@@ -1,8 +1,8 @@
 //
 //  ISSoundAdditions.m (ver 1.2 - 2012.10.27)
 //
-//	Created by Massimo Moiso (2012-09) InerziaSoft
-//	based on an idea of Antonio Nunes, SintraWorks
+//    Created by Massimo Moiso (2012-09) InerziaSoft
+//    based on an idea of Antonio Nunes, SintraWorks
 //
 // Permission is granted free of charge to use this code without restriction
 // and without limitation, with the only condition that the copyright
@@ -27,10 +27,10 @@
  To maintain the Cocoa conventions, a property-like syntax was used; the following
  methods ("properties") are available:
  
-	(float)systemVolume			- return the volume of the default sound device
-	setSystemVolume(float)			- set the volume of the default sound device
-	(AudioDeviceID)defaultOutputDevice	- return the default output device
-	applyMute(boolean)			- enable or disable muting, if supported
+ (float)systemVolume            - return the volume of the default sound device
+ setSystemVolume(float)            - set the volume of the default sound device
+ (AudioDeviceID)defaultOutputDevice    - return the default output device
+ applyMute(boolean)            - enable or disable muting, if supported
  
  REQUIREMENTS
  At least MacOS X 10.6
@@ -52,7 +52,8 @@
 + (void)decreaseSystemVolumeBy:(float)amount;
 
 + (void)applyMute:(Boolean)m;
++ (Boolean)isMuted;
 
-#define	THRESHOLD	0.005			//if the volume should be set under this value, the device will be muted
+#define    THRESHOLD    0.005            //if the volume should be set under this value, the device will be muted
 
 @end

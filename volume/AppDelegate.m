@@ -78,7 +78,8 @@
 	// TODO: test black and white, and dark system menu
 	NSImage *image;
 	float vol = [NSSound systemVolume];
-	if (vol < 0.034) { // muted
+    bool isMuted = [NSSound isMuted];
+    if (isMuted) { // muted
 		image = [NSImage imageNamed:@"volume_0"];
 	} else if ( vol > 0.66) {
 		image = [NSImage imageNamed:@"volume_75"];
@@ -220,14 +221,26 @@
 	[self.target performSelector:@selector(addQuitMenu) withObject:nil];
 }
 
-- (void)scrollWheel:(NSEvent *)theEvent {
+- (void)scrollWheel:(NSEvent *)event {
     float vol = [NSSound systemVolume];
+    float increment = 0.05;
+    float setVolTo;
 
-    if (theEvent.deltaY < 0) {  // Down
-        [self.target performSelector:@selector(sliderAction:) withObject:[NSNumber numberWithFloat:vol-0.05]];
+    if (event.deltaY < 0) {  // Down
+        if (vol - increment <= 0) {
+            setVolTo = 0.0;
+        } else {
+            setVolTo = vol - increment;
+        }
     } else {  // Up
-        [self.target performSelector:@selector(sliderAction:) withObject:[NSNumber numberWithFloat:vol+0.05]];
+        if (vol + increment > 1) {
+            setVolTo = 1;
+        } else {
+            setVolTo = vol + increment;
+        }
     }
+    
+    [self.target performSelector:@selector(sliderAction:) withObject:[NSNumber numberWithFloat:setVolTo]];
 }
 
 @end
